@@ -1,55 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jack Gaffney – 2D C++ Game Engine</title>
-  <!-- External font & unified stylesheet -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jack Gaffney – fr-Ocean Game Engine</title>
+  <!-- Fonts and styles -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <!-- Navigation -->
   <nav class="top-nav">
     <div class="nav-inner">
       <span><strong>fr-Ocean Engine repo</strong></span>
-      <a class="repo-btn" href="https://github.com/jackgaff/game_engine" target="_blank" rel="noopener">GitHub Repo ↗</a>
+      <a class="repo-btn" href="https://github.com/jackgaff/game_engine" target="_blank" rel="noopener">GitHub Repo ↗</a>
     </div>
   </nav>
-
+  
+  <!-- Hero section -->
   <header class="hero">
     <h1>fr-Ocean Engine</h1>
-    <p>A cross‑platform engine featuring SDL2 rendering, Box2D physics, Lua scripting, and a robust CMake‑based build pipeline.</p>
+    <p>A cross‑platform engine featuring SDL2 rendering, Box2D physics, Lua scripting, and a robust CMake‑based build pipeline.</p>
     <div class="video-container">
-      <iframe
-        src="https://www.youtube.com/embed/COKErpZUGdc"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-        title="Engine Demonstration">
+      <!-- Fixed video embed with explicit dimensions -->
+      <iframe 
+        width="560" 
+        height="315" 
+        src="https://www.youtube.com/embed/COKErpZUGdc?rel=0" 
+        title="Engine Demonstration"
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
       </iframe>
+      
+      <!-- Fallback if iframe doesn't work -->
+      <p class="video-fallback">
+        <a href="https://www.youtube.com/watch?v=COKErpZUGdc" target="_blank" rel="noopener">
+          Watch the engine demonstration on YouTube ↗
+        </a>
+      </p>
     </div>
   </header>
-
+  
   <main>
+    <!-- Technologies section -->
     <section>
-      <h2>Technologies Used</h2>
+      <h2>Technologies Used</h2>
       <ul class="tech-grid">
         <li>C++17</li>
-        <li>CMake&nbsp;3.16+</li>
-        <li>Lua&nbsp;5.4</li>
+        <li>CMake 3.16+</li>
+        <li>Lua 5.4</li>
         <li>LuaBridge</li>
-        <li>SDL2<br><small>+ image / mixer / ttf</small></li>
+        <li>SDL2<br><small>+ image / mixer / ttf</small></li>
         <li>Box2D</li>
         <li>GLM</li>
         <li>RapidJSON</li>
         <li>CPack</li>
-        <li>GitHub Actions<br><small>(optional)</small></li>
+        <li>GitHub Actions<br><small>(optional)</small></li>
       </ul>
     </section>
-
+    
+    <!-- Features section -->
     <section class="features">
-      <h2>Engine Features</h2>
+      <h2>Engine Features</h2>
       <ul>
         <li><strong>Component‑based architecture</strong> with runtime Lua scripting</li>
         <li>Pixel‑perfect 2D physics powered by Box2D</li>
@@ -60,36 +75,37 @@
         <li>Audio playback for SFX &amp; music using SDL2_mixer</li>
       </ul>
     </section>
-
+    
+    <!-- Build instructions section -->
     <section id="build">
-      <h2>Building from Source</h2>
-
+      <h2>Building from Source</h2>
+      
       <h3>Windows</h3>
       <pre><code>git clone https://github.com/jackgaff/game_engine.git
 cd game_engine
-mkdir build &amp;&amp; cd build
+mkdir build && cd build
 cmake -G "Visual Studio 17 2022" ..
 cmake --build . --config Release
-REM Install &amp; package (no sudo on Windows)
+REM Install & package (no sudo on Windows)
 cmake --build . --target install --config Release
 cpack</code></pre>
-
+      
       <h3>macOS</h3>
       <pre><code>git clone https://github.com/jackgaff/game_engine.git
 cd game_engine
-mkdir build &amp;&amp; cd build
+mkdir build && cd build
 cmake ..
 cmake --build . --config Release
 # Optional: generate an Xcode project
 # cmake -G Xcode ..
-# Install &amp; package
+# Install & package
 sudo cmake --build . --target install --config Release
 sudo cpack</code></pre>
-
+      
       <h3>Linux</h3>
       <pre><code>git clone https://github.com/jackgaff/game_engine.git
 cd game_engine
-mkdir build &amp;&amp; cd build
+mkdir build && cd build
 cmake ..
 make -j$(nproc)
 # Install system‑wide (uses DESTDIR under sudo)
@@ -98,14 +114,14 @@ sudo make install
 sudo cmake --build . --target install
 # Package into .tar.gz / .zip
 sudo cpack</code></pre>
-
-      <h3>What does <code>cpack</code> do?</h3>
-      <p><code>cpack</code> leverages the install rules in <code>CMakeLists.txt</code> to bundle the engine—binaries, resources, and licenses—into platform‑appropriate archives (default: <code>.tgz</code> &amp; <code>.zip</code>). Run it in your build directory after <code>install</code>, and you’ll get ready‑to‑ship packages in <code>_CPack_Packages/</code>.</p>
+      
+      <h3>What does <code>cpack</code> do?</h3>
+      <p><code>cpack</code> leverages the install rules in <code>CMakeLists.txt</code> to bundle the engine—binaries, resources, and licenses—into platform‑appropriate archives (default: <code>.tgz</code> &amp; <code>.zip</code>). Run it in your build directory after <code>install</code>, and you'll get ready‑to‑ship packages in <code>_CPack_Packages/</code>.</p>
     </section>
   </main>
-
+  
   <footer>
-    &copy; 2025 Jack Gaffney — University of Michigan.
+    &copy; 2025 Jack Gaffney — University of Michigan.
   </footer>
 </body>
 </html>
