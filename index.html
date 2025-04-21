@@ -19,10 +19,10 @@
   </nav>
 
   <header class="hero">
-    <h1>f-ocean engine</h1>
-    <p>A cross‑platform, 2d C++ engine featuring SDL2 rendering, Box2D physics, Lua scripting, and a robust CMake‑based build pipeline.</p>
-    <!-- Swap in your YouTube ID or local video -->
+    <h1>C++ 2D Game Engine</h1>
+    <p>A cross‑platform engine featuring SDL2 rendering, Box2D physics, Lua scripting, and a robust CMake‑based build pipeline.</p>
     <div class="video-container">
+      <!-- Replace the YouTube ID below -->
       <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen title="Engine Demonstration"></iframe>
     </div>
   </header>
@@ -32,15 +32,15 @@
       <h2>Technologies Used</h2>
       <ul class="tech-grid">
         <li>C++17</li>
-        <li>CMake 3.16+</li>
-        <li>Lua 5.4</li>
+        <li>CMake&nbsp;3.16+</li>
+        <li>Lua&nbsp;5.4</li>
         <li>LuaBridge</li>
-        <li>SDL2 (+ image / mixer / ttf)</li>
+        <li>SDL2<br><small>+ image / mixer / ttf</small></li>
         <li>Box2D</li>
         <li>GLM</li>
         <li>RapidJSON</li>
         <li>CPack</li>
-        <li>GitHub Actions (optional)</li>
+        <li>GitHub Actions<br><small>(optional)</small></li>
       </ul>
     </section>
 
@@ -58,44 +58,45 @@
     </section>
 
     <section id="build">
-      <h2>Build &amp; Package with CMake + CPack</h2>
-      <p>The engine ships with an opinionated <code>CMakeLists.txt</code> that hides platform quirks while giving you sensible defaults:</p>
-      <ul>
-        <li><strong>Modern warnings &amp; build types</strong> (<code>-Wall -Wextra</code> + <code>-g</code>/<code>-O3</code>) baked in.</li>
-        <li><strong>Vendored static libs</strong> for <code>Box2D</code> and <code>lua</code>, eliminating external dependencies.</li>
-        <li><strong>Platform‑aware linkage</strong>: <code>pkg‑config</code> on Linux, <code>.framework</code> bundles on macOS (with automatic RPATH fix‑up), and <code>.lib/.dll</code> copying on Windows.</li>
-        <li><strong>Post‑build resource copy</strong> so your executable always ships with a self‑contained <code>resources/</code> folder.</li>
-        <li><strong>Install rules</strong> that follow OS conventions (<code>share/</code> on Linux, alongside the binary elsewhere).</li>
-        <li><strong>CPack integration</strong> to generate <code>.zip</code> / <code>.tgz</code> ready for end‑users—no extra scripts needed.</li>
-      </ul>
+      <h2>Building from Source</h2>
 
-      <h3>Quick Start</h3>
-      <pre><code># Clone & build
+      <h3>Windows</h3>
+      <pre><code>git clone https://github.com/jackgaff/game_engine.git
+cd game_engine
 mkdir build &amp;&amp; cd build
-cmake .. -DCMAKE_BUILD_TYPE=Release
-cmake --build . -j$(nproc)
+cmake -G "Visual Studio 17 2022" ..
+cmake --build . --config Release
+REM Install &amp; package (no sudo on Windows)
+cmake --build . --target install --config Release
+cpack</code></pre>
 
-# Run the sample scene
-./bin/game_engine</code></pre>
+      <h3>macOS</h3>
+      <pre><code>git clone https://github.com/jackgaff/game_engine.git
+cd game_engine
+mkdir build &amp;&amp; cd build
+cmake ..
+cmake --build . --config Release
+# Optional: generate an Xcode project
+# cmake -G Xcode ..
+# Install &amp; package
+sudo cmake --build . --target install --config Release
+sudo cpack</code></pre>
 
-      <h3>Install Locally</h3>
-      <pre><code>cmake --install . --prefix "$HOME/.local"</code></pre>
+      <h3>Linux</h3>
+      <pre><code>git clone https://github.com/jackgaff/game_engine.git
+cd game_engine
+mkdir build &amp;&amp; cd build
+cmake ..
+make -j$(nproc)
+# Install system‑wide (uses DESTDIR under sudo)
+sudo make install
+# Or with CMake
+sudo cmake --build . --target install
+# Package into .tar.gz / .zip
+sudo cpack</code></pre>
 
-      <h3>Create Distributable Archives</h3>
-      <pre><code># Inside the build directory
-cpack              # Generates game_engine-Linux.tar.gz / .zip etc.</code></pre>
-      <p>Need an MSI, DEB, or DMG? Swap the generator: <code>cpack -G DEB</code> (after adding install metadata).</p>
-    </section>
-
-    <section>
-      <h2>Using the Engine in Your Game</h2>
-      <ol>
-        <li>Clone the repo and add it as a submodule or drop it alongside your game sources.</li>
-        <li>Include <code>add_subdirectory(game_engine)</code> in your own <code>CMakeLists.txt</code>.</li>
-        <li>Link against <code>game_engine</code>:
-          <pre><code>target_link_libraries(MyGame PRIVATE game_engine)</code></pre></li>
-      </ol>
-      <p>That’s it—CMake propagates include directories, SDL/Box2D linkage, and resource copying for you.</p>
+      <h3>What does <code>cpack</code> do?</h3>
+      <p><code>cpack</code> leverages the install rules in <code>CMakeLists.txt</code> to bundle the engine—binaries, resources, and licenses—into platform‑appropriate archives (default: <code>.tgz</code> &amp; <code>.zip</code>). Run it in your build directory after <code>install</code>, and you’ll get ready‑to‑ship packages in <code>_CPack_Packages/</code>.</p>
     </section>
   </main>
 
